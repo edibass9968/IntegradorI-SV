@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="REPORTE-BOLETA" language="groovy" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1f3adc0f-fa09-48d9-8c98-847e13e79fb3">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TH" mode="Opaque" backcolor="#00FFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_CH" mode="Opaque" backcolor="#BFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 1_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 2">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 2_TH" mode="Opaque" backcolor="#00FFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 2_CH" mode="Opaque" backcolor="#BFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table 2_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="servicios" uuid="353fcc25-874b-426f-957b-0d00f26dd064">
+		<queryString language="SQL">
+			<![CDATA[SELECT
+     detalleservicio.`ID_SERVI` AS detalleservicio_ID_SERVI,
+     servicio.`DESC_SERVI` AS servicio_DESC_SERVI,
+     servicio.`PRECIO_SERVI` AS servicio_PRECIO_SERVI
+FROM
+     `servicio` servicio INNER JOIN `detalleservicio` detalleservicio ON servicio.`ID_SERVI` = detalleservicio.`ID_SERVI`]]>
+		</queryString>
+		<field name="detalleservicio_ID_SERVI" class="java.lang.Integer"/>
+		<field name="servicio_DESC_SERVI" class="java.lang.String"/>
+		<field name="servicio_PRECIO_SERVI" class="java.math.BigDecimal"/>
+	</subDataset>
+	<subDataset name="PRODUCTOS" uuid="e792ae7e-00f5-4ffb-889d-33c744c20528">
+		<queryString language="SQL">
+			<![CDATA[SELECT
+     detalleventa.`ID_VENTA` AS detalleventa_ID_VENTA,
+     detalleventa.`CANT_DETVEN` AS detalleventa_CANT_DETVEN,
+     detalleventa.`MONTO_DETVEN` AS detalleventa_MONTO_DETVEN,
+     producto.`NOM_PRODU` AS producto_NOM_PRODU,
+     producto.`PRECIO_PRODU` AS producto_PRECIO_PRODU
+FROM
+     `producto` producto INNER JOIN `detalleventa` detalleventa ON producto.`ID_PRODU` = detalleventa.`ID_PRODU`]]>
+		</queryString>
+		<field name="detalleventa_ID_VENTA" class="java.lang.Integer"/>
+		<field name="detalleventa_CANT_DETVEN" class="java.lang.Integer"/>
+		<field name="detalleventa_MONTO_DETVEN" class="java.math.BigDecimal"/>
+		<field name="producto_NOM_PRODU" class="java.lang.String"/>
+		<field name="producto_PRECIO_PRODU" class="java.math.BigDecimal"/>
+	</subDataset>
+	<queryString language="SQL">
+		<![CDATA[SELECT
+     cliente.`NOM_CLIEN` AS cliente_NOM_CLIEN,
+     cliente.`APE_CLIEN` AS cliente_APE_CLIEN,
+     cliente.`DNI_CLIEN` AS cliente_DNI_CLIEN,
+     detalleventa.`CANT_DETVEN` AS detalleventa_CANT_DETVEN,
+     detalleventa.`MONTO_DETVEN` AS detalleventa_MONTO_DETVEN,
+     servicio.`DESC_SERVI` AS servicio_DESC_SERVI,
+     servicio.`PRECIO_SERVI` AS servicio_PRECIO_SERVI,
+     producto.`NOM_PRODU` AS producto_NOM_PRODU,
+     producto.`PRECIO_PRODU` AS producto_PRECIO_PRODU,
+     venta.`ID_VENTA` AS venta_ID_VENTA,
+     venta.`FECHA_VENTA` AS venta_FECHA_VENTA,
+     venta.`TOTAL_VENTA` AS venta_TOTAL_VENTA
+FROM
+     `producto` producto INNER JOIN `detalleventa` detalleventa ON producto.`ID_PRODU` = detalleventa.`ID_PRODU`
+     INNER JOIN `venta` venta ON detalleventa.`ID_VENTA` = venta.`ID_VENTA`
+     INNER JOIN `cliente` cliente ON venta.`ID_CLIEN` = cliente.`ID_CLIEN`,
+     `servicio` servicio]]>
+	</queryString>
+	<field name="cliente_NOM_CLIEN" class="java.lang.String"/>
+	<field name="cliente_APE_CLIEN" class="java.lang.String"/>
+	<field name="cliente_DNI_CLIEN" class="java.lang.String"/>
+	<field name="detalleventa_CANT_DETVEN" class="java.lang.Integer"/>
+	<field name="detalleventa_MONTO_DETVEN" class="java.math.BigDecimal"/>
+	<field name="servicio_DESC_SERVI" class="java.lang.String"/>
+	<field name="servicio_PRECIO_SERVI" class="java.math.BigDecimal"/>
+	<field name="producto_NOM_PRODU" class="java.lang.String"/>
+	<field name="producto_PRECIO_PRODU" class="java.math.BigDecimal"/>
+	<field name="venta_ID_VENTA" class="java.lang.Integer"/>
+	<field name="venta_FECHA_VENTA" class="java.lang.String"/>
+	<field name="venta_TOTAL_VENTA" class="java.math.BigDecimal"/>
+	<variable name="venta_TOTAL_VENTA_1" class="java.math.BigDecimal" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$F{venta_TOTAL_VENTA}]]></variableExpression>
+	</variable>
+	<variable name="servicio_PRECIO_SERVI_1" class="java.math.BigDecimal" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$F{servicio_PRECIO_SERVI}]]></variableExpression>
+	</variable>
+	<variable name="venta_TOTAL_VENTA_2" class="java.math.BigDecimal" resetType="Page" calculation="Sum">
+		<variableExpression><![CDATA[$F{venta_TOTAL_VENTA}]]></variableExpression>
+	</variable>
+	<variable name="venta_TOTAL_VENTA_3" class="java.math.BigDecimal" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$F{venta_TOTAL_VENTA}]]></variableExpression>
+	</variable>
+	<variable name="venta_TOTAL_VENTA_4" class="java.math.BigDecimal" resetType="Page" calculation="Sum">
+		<variableExpression><![CDATA[$F{venta_TOTAL_VENTA}]]></variableExpression>
+	</variable>
+	<variable name="detalleventa_MONTO_DETVEN_1" class="java.math.BigDecimal" resetType="Page" calculation="Sum">
+		<variableExpression><![CDATA[$F{detalleventa_MONTO_DETVEN}]]></variableExpression>
+	</variable>
+	<variable name="venta_TOTAL_VENTA_5" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{venta_TOTAL_VENTA}]]></variableExpression>
+	</variable>
+	<variable name="detalleventa_MONTO_DETVEN_2" class="java.math.BigDecimal" calculation="Sum">
+		<variableExpression><![CDATA[$F{detalleventa_MONTO_DETVEN}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="59" splitType="Stretch">
+			<staticText>
+				<reportElement x="202" y="13" width="153" height="37" uuid="2decc453-1cf6-43a8-8278-479c9fd9093f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[BOLETA]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="89" splitType="Stretch">
+			<staticText>
+				<reportElement x="17" y="15" width="100" height="20" uuid="28d5f7c9-3b71-4997-bde5-91e0c2b85213"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CLIENTE:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="302" y="49" width="100" height="20" uuid="4cdf3b3d-9a8e-48c9-a392-29b70b2bbc63"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[FECHA:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="17" y="49" width="100" height="20" uuid="1f347c54-99a0-48cc-ad78-d8918bc787b9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DNI:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="128" y="15" width="100" height="20" uuid="08093fc4-3ac8-495d-bdb3-dd4800ce44cc"/>
+				<textFieldExpression><![CDATA[$F{cliente_NOM_CLIEN}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="243" y="15" width="100" height="20" uuid="58a9609d-ad08-486f-b512-3e53342347c0"/>
+				<textFieldExpression><![CDATA[$F{cliente_APE_CLIEN}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="128" y="49" width="100" height="20" uuid="e60fb6ad-825d-4b40-9b5b-2e71927ab316"/>
+				<textFieldExpression><![CDATA[$F{cliente_DNI_CLIEN}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="426" y="49" width="100" height="20" uuid="42590f23-ae6d-4058-b95e-4221854177f2"/>
+				<textFieldExpression><![CDATA[$F{venta_FECHA_VENTA}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="302" splitType="Stretch">
+			<componentElement>
+				<reportElement key="table" style="table" x="94" y="24" width="360" height="80" uuid="2c5d9b1b-bfdc-4fdb-93b4-ee88cafc1bb4"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="servicios" uuid="d333d63e-e8cf-4cce-af6c-8302e5eb4c3f">
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="90" uuid="98844a93-5c57-4f49-8843-98732fb7db65">
+						<jr:columnHeader style="table_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="90" height="30" uuid="b456ca90-9cd3-4a9a-8c97-a93704f13f56"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="12" isBold="true"/>
+								</textElement>
+								<text><![CDATA[ID-SERVICIO]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="20" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="90" height="20" uuid="b1f7295e-c797-4370-addc-da96147b819f"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{detalleservicio_ID_SERVI}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="90" uuid="0a2468e0-43f2-4659-865a-5271228eeba8">
+						<jr:columnHeader style="table_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="90" height="30" uuid="0ec76e83-3e95-4940-8bf0-03ed960127e6"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="12" isBold="true"/>
+								</textElement>
+								<text><![CDATA[DESCRIPCIÓN]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="20" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="90" height="20" uuid="5dc2b7d5-0b5a-4e3a-8df2-b1fa9a769317"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{servicio_DESC_SERVI}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="90" uuid="8417d3f9-4c2e-4e86-a265-7dfa7d9dfdc8">
+						<jr:columnHeader style="table_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="90" height="30" uuid="2afa6093-ae11-47d9-9478-5896aea06ef5"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="12" isBold="true"/>
+								</textElement>
+								<text><![CDATA[PRECIO]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="20" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="90" height="20" uuid="cfeb3469-d565-4526-a890-a490d6aa6406"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{servicio_PRECIO_SERVI}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+			<componentElement>
+				<reportElement key="table 2" style="table 2" x="94" y="125" width="360" height="80" uuid="29a5646d-14d0-4ee0-bb20-3fe601879060"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="PRODUCTOS" uuid="af357d08-80ad-40b9-a583-560d49298e39">
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="90" uuid="b988e2de-5502-45da-a68d-f7fbf470fa7f">
+						<jr:columnHeader style="table 2_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="90" height="30" uuid="c3fb0c65-63e9-4d45-a4c1-988f7d25f8cb"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="14" isBold="true"/>
+								</textElement>
+								<text><![CDATA[ID-VENTA]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table 2_TD" height="20" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="90" height="20" uuid="8858fab4-9114-41f9-960d-c9adfa0dca81"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{detalleventa_ID_VENTA}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="90" uuid="78a5cab0-56d2-4901-a7b4-7ed53590fda1">
+						<jr:columnHeader style="table 2_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="90" height="30" uuid="66d40a22-f7f3-42fe-bda5-10319bb519bd"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="14" isBold="true"/>
+								</textElement>
+								<text><![CDATA[PRODUCTO]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table 2_TD" height="20" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="90" height="20" uuid="683e8fde-d894-410f-9fd4-66dde0e238b3"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{producto_NOM_PRODU}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="90" uuid="32ecf3f6-deab-490e-9e0d-b37bcc9288f1">
+						<jr:columnHeader style="table 2_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="90" height="30" uuid="b8a8e318-6a8a-4dcd-8e8b-efe38d805a50"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="14" isBold="true"/>
+								</textElement>
+								<text><![CDATA[PRECIO UNI.]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table 2_TD" height="20" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="90" height="20" uuid="0b98ce39-8b7d-478a-bdab-b66eb6c7bb53"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{producto_PRECIO_PRODU}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="90" uuid="5c7556f3-dab0-4554-8478-6bd3881f1e70">
+						<jr:columnHeader style="table 2_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="90" height="30" uuid="51324f99-648f-4c2e-a068-59ad8b750a3b"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="14" isBold="true"/>
+								</textElement>
+								<text><![CDATA[CANTIDAD]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table 2_TD" height="20" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="90" height="20" uuid="00ccd978-2865-4e2f-ba1d-def8ff10f1ae"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{detalleventa_CANT_DETVEN}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="90" uuid="32d6030a-416b-40a3-a6bd-1192ac8c6876">
+						<jr:columnHeader style="table 2_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="90" height="30" uuid="ed8ee161-adca-4c93-b6d0-977837ae66f7"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="14" isBold="true"/>
+								</textElement>
+								<text><![CDATA[MONTO GENERAL]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table 2_TD" height="20" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="90" height="20" uuid="df557880-01c5-4ab8-b720-bb3ac7270e03"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{detalleventa_MONTO_DETVEN}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+			<textField>
+				<reportElement x="454" y="218" width="100" height="20" uuid="436a0ea7-1169-43b3-aaae-83677127dc8a"/>
+				<textFieldExpression><![CDATA[$F{venta_TOTAL_VENTA}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="326" y="218" width="100" height="20" uuid="5bbe1296-6727-47c1-9f1c-5e073366cd33"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TOTAL A PAGAR]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<summary>
+		<band height="90"/>
+	</summary>
+</jasperReport>

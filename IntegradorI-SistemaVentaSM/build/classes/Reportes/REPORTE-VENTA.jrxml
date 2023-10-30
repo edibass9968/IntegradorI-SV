@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f5c6b774-e247-4691-b2ce-acbbbbb73ded">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT
+     producto.`NOM_PRODU` AS producto_NOM_PRODU,
+     servicio.`DESC_SERVI` AS servicio_DESC_SERVI,
+     servicio.`PRECIO_SERVI` AS servicio_PRECIO_SERVI,
+     detalleventa.`CANT_DETVEN` AS detalleventa_CANT_DETVEN,
+     detalleventa.`MONTO_DETVEN` AS detalleventa_MONTO_DETVEN,
+     cliente.`APE_CLIEN` AS cliente_APE_CLIEN,
+     venta.`TOTAL_VENTA` AS venta_TOTAL_VENTA,
+     producto.`PRECIO_PRODU` AS producto_PRECIO_PRODU,
+     detalleservicio.`ID_SERVI` AS detalleservicio_ID_SERVI,
+     cliente.`NOM_CLIEN` AS cliente_NOM_CLIEN,
+     venta.`FECHA_VENTA` AS venta_FECHA_VENTA,
+     producto.`ID_PRODU` AS producto_ID_PRODU,
+     servicio.`ID_SERVI` AS servicio_ID_SERVI,
+     detalleventa.`ID_VENTA` AS detalleventa_ID_VENTA,
+     cliente.`ID_CLIEN` AS cliente_ID_CLIEN,
+     venta.`ID_VENTA` AS venta_ID_VENTA,
+     detalleservicio.`ID_VENTA` AS detalleservicio_ID_VENTA
+FROM
+     `producto` producto INNER JOIN `detalleventa` detalleventa ON producto.`ID_PRODU` = detalleventa.`ID_PRODU`
+     INNER JOIN `venta` venta ON detalleventa.`ID_VENTA` = venta.`ID_VENTA`
+     INNER JOIN `cliente` cliente ON venta.`ID_CLIEN` = cliente.`ID_CLIEN`
+     INNER JOIN `detalleservicio` detalleservicio ON venta.`ID_VENTA` = detalleservicio.`ID_VENTA`
+     INNER JOIN `servicio` servicio ON detalleservicio.`ID_SERVI` = servicio.`ID_SERVI`]]>
+	</queryString>
+	<field name="producto_NOM_PRODU" class="java.lang.String"/>
+	<field name="servicio_DESC_SERVI" class="java.lang.String"/>
+	<field name="servicio_PRECIO_SERVI" class="java.math.BigDecimal"/>
+	<field name="detalleventa_CANT_DETVEN" class="java.lang.Integer"/>
+	<field name="detalleventa_MONTO_DETVEN" class="java.math.BigDecimal"/>
+	<field name="cliente_APE_CLIEN" class="java.lang.String"/>
+	<field name="venta_TOTAL_VENTA" class="java.math.BigDecimal"/>
+	<field name="producto_PRECIO_PRODU" class="java.math.BigDecimal"/>
+	<field name="detalleservicio_ID_SERVI" class="java.lang.Integer"/>
+	<field name="cliente_NOM_CLIEN" class="java.lang.String"/>
+	<field name="venta_FECHA_VENTA" class="java.lang.String"/>
+	<field name="producto_ID_PRODU" class="java.lang.Integer"/>
+	<field name="servicio_ID_SERVI" class="java.lang.Integer"/>
+	<field name="detalleventa_ID_VENTA" class="java.lang.Integer"/>
+	<field name="cliente_ID_CLIEN" class="java.lang.Integer"/>
+	<field name="venta_ID_VENTA" class="java.lang.Integer"/>
+	<field name="detalleservicio_ID_VENTA" class="java.lang.Integer"/>
+	<variable name="detalleventa_MONTO_DETVEN_1" class="java.math.BigDecimal" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$F{detalleventa_MONTO_DETVEN}]]></variableExpression>
+	</variable>
+	<variable name="venta_TOTAL_VENTA_1" class="java.math.BigDecimal" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[$F{venta_TOTAL_VENTA}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="87" splitType="Stretch">
+			<staticText>
+				<reportElement x="246" y="0" width="252" height="79" uuid="7911cbbd-70c4-4f9b-84a0-91a05dec5aee"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[BOLETA DE INGRESOS]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="4" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="33" splitType="Stretch">
+			<staticText>
+				<reportElement x="167" y="8" width="179" height="20" uuid="d7ef7326-a50d-4361-b025-6a629c04d950"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PRODUCTO / SERVICIO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="23" y="8" width="100" height="20" uuid="e06a6c06-e1cf-43a6-84f6-3b48fa8c2975"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CÓDIGO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="405" y="8" width="100" height="20" uuid="58d2b3cf-eec2-4218-bb80-ff19316f39eb"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CANTIDAD]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="678" y="8" width="100" height="20" uuid="e24d94f0-3b65-4723-a9d2-a196cc51ef00"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[MONTO]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="61" splitType="Stretch">
+			<textField>
+				<reportElement x="167" y="9" width="179" height="20" uuid="4df5c083-21d3-4e90-ad24-df8e7c315d6a"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{producto_NOM_PRODU}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="23" y="9" width="100" height="17" uuid="5b17b453-ad2b-4063-b82e-509bda950761"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{producto_ID_PRODU}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="405" y="6" width="100" height="20" uuid="e27a6dda-59f0-4fb2-9c55-e1473babf3b7"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true" isItalic="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{detalleventa_CANT_DETVEN}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="678" y="13" width="100" height="20" uuid="dcae2989-2026-410a-8899-d35089eab73f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{detalleventa_MONTO_DETVEN}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="678" y="41" width="100" height="20" uuid="4e1eecbf-e776-4905-91ab-038a525ad69d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{servicio_PRECIO_SERVI}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="167" y="33" width="179" height="20" uuid="9f2c266f-97a6-47bc-9578-1fe0f452ae52"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{servicio_DESC_SERVI}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="23" y="33" width="100" height="20" uuid="e3ec1ddc-a816-4b07-bca6-51fafebba4af"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{servicio_ID_SERVI}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch">
+			<textField>
+				<reportElement x="678" y="11" width="100" height="20" uuid="bf7de3f1-e83e-415e-a59d-3b882449e4f5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{venta_TOTAL_VENTA_1}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="532" y="11" width="132" height="20" uuid="111c7445-e960-4110-be33-e8a582794254"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[MONTO TOTAL:]]></text>
+			</staticText>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

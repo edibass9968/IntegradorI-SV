@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report1" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="bc41d050-336a-4bd8-a8d6-11e5b1207026">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#7FFF00">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#DFFFBF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="mascotas" uuid="b1133008-f1a2-4f1e-84c8-b1d3e501e6b8">
+		<queryString language="SQL">
+			<![CDATA[SELECT
+     mascota.`ID_MASCO` AS mascota_ID_MASCO,
+     mascota.`NOM_MASCO` AS mascota_NOM_MASCO,
+     mascota.`GENE_MASCO` AS mascota_GENE_MASCO,
+     mascota.`RAZA_MASCO` AS mascota_RAZA_MASCO,
+     cliente.`NOM_CLIEN` AS cliente_NOM_CLIEN
+FROM
+     `cliente` cliente INNER JOIN `mascota` mascota ON cliente.`ID_CLIEN` = mascota.`ID_CLIEN`]]>
+		</queryString>
+		<field name="mascota_ID_MASCO" class="java.lang.Integer"/>
+		<field name="mascota_NOM_MASCO" class="java.lang.String"/>
+		<field name="mascota_GENE_MASCO" class="java.lang.String"/>
+		<field name="mascota_RAZA_MASCO" class="java.lang.String"/>
+		<field name="cliente_NOM_CLIEN" class="java.lang.String"/>
+	</subDataset>
+	<queryString language="SQL">
+		<![CDATA[SELECT
+     mascota.`ID_MASCO` AS mascota_ID_MASCO,
+     mascota.`NOM_MASCO` AS mascota_NOM_MASCO,
+     mascota.`GENE_MASCO` AS mascota_GENE_MASCO,
+     mascota.`RAZA_MASCO` AS mascota_RAZA_MASCO,
+     mascota.`ID_CLIEN` AS mascota_ID_CLIEN,
+     mascota.`ID_TIPOMAS` AS mascota_ID_TIPOMAS
+FROM
+     `mascota` mascota]]>
+	</queryString>
+	<field name="mascota_ID_MASCO" class="java.lang.Integer"/>
+	<field name="mascota_NOM_MASCO" class="java.lang.String"/>
+	<field name="mascota_GENE_MASCO" class="java.lang.String"/>
+	<field name="mascota_RAZA_MASCO" class="java.lang.String"/>
+	<field name="mascota_ID_CLIEN" class="java.lang.Integer"/>
+	<field name="mascota_ID_TIPOMAS" class="java.lang.Integer"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="58" splitType="Stretch">
+			<staticText>
+				<reportElement x="147" y="14" width="265" height="32" uuid="5f5b39b3-10a4-40a2-b8a7-88d61aae5b56"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[LISTA DE MASCOTAS]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="20" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="182" splitType="Stretch">
+			<componentElement>
+				<reportElement key="table" style="table" x="52" y="41" width="360" height="80" uuid="7d75e1a1-f362-4597-b0d2-8e6d93aa5543"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="mascotas" uuid="9f10015e-16ae-4468-910a-468797996acf">
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="90" uuid="86451c31-8c9a-472e-8c6e-cd5f0b7b5088">
+						<jr:columnHeader style="table_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="90" height="30" uuid="a20c8eff-35b5-4378-b828-d6a5b1682718"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="12" isBold="true"/>
+								</textElement>
+								<text><![CDATA[ID]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="20" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="90" height="20" uuid="2643e113-4d4b-4d1c-812a-ed393ebfac54"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{mascota_ID_MASCO}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="90" uuid="07c26645-cd4d-4973-9934-eacf2b4de9bc">
+						<jr:columnHeader style="table_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="90" height="30" uuid="31b907fc-cb14-419c-a456-f25ad1fb6d75"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="12" isBold="true"/>
+								</textElement>
+								<text><![CDATA[MASCOTA]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="20" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="90" height="20" uuid="dece1364-67be-4827-b27a-186354d635b8"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{mascota_NOM_MASCO}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="90" uuid="bf66195f-a8df-4102-8de5-0744674ce16f">
+						<jr:columnHeader style="table_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="90" height="30" uuid="940ce14a-f60b-4ec4-a36c-af2a5792a4d7"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="12" isBold="true"/>
+								</textElement>
+								<text><![CDATA[GENERO]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="20" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="90" height="20" uuid="6ee485eb-c002-4388-ab2f-60b111a8cb2f"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{mascota_GENE_MASCO}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="90" uuid="7f23eeac-f9f0-4cc6-afbf-7e33b2b392c4">
+						<jr:columnHeader style="table_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="90" height="30" uuid="7a0d8ee7-bf47-4a17-879e-8d2b0e28f657"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="12" isBold="true"/>
+								</textElement>
+								<text><![CDATA[RAZA]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="20" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="90" height="20" uuid="29ffbfa6-0743-410a-97c5-10ef5d5eab5e"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{mascota_RAZA_MASCO}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="90" uuid="395a0054-65e4-4a67-a201-8028ad602b26">
+						<jr:columnHeader style="table_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="90" height="30" uuid="7fe46cb6-d162-466a-83c7-d37714b666da"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="12" isBold="true"/>
+								</textElement>
+								<text><![CDATA[DUEÑO]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="20" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="90" height="20" uuid="cc2cbaee-98d6-43ae-a6a3-c6ec9eae1204"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{cliente_NOM_CLIEN}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+	</columnHeader>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

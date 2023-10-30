@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rpProductos" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="aee5831d-930c-4845-867a-d7f7e96b5dff">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TH" mode="Opaque" backcolor="#7FFFD4">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_CH" mode="Opaque" backcolor="#BFFFEA">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="producto" uuid="b51dbe0d-88b5-49ce-8d3e-11d47e83b832">
+		<queryString language="SQL">
+			<![CDATA[SELECT
+     producto.`ID_PRODU` AS producto_ID_PRODU,
+     producto.`NOM_PRODU` AS producto_NOM_PRODU,
+     producto.`STOCK_PRODU` AS producto_STOCK_PRODU,
+     producto.`PRECIO_PRODU` AS producto_PRECIO_PRODU
+FROM
+     `producto` producto]]>
+		</queryString>
+		<field name="producto_ID_PRODU" class="java.lang.Integer"/>
+		<field name="producto_NOM_PRODU" class="java.lang.String"/>
+		<field name="producto_STOCK_PRODU" class="java.lang.Integer"/>
+		<field name="producto_PRECIO_PRODU" class="java.math.BigDecimal"/>
+	</subDataset>
+	<queryString>
+		<![CDATA[SELECT
+     producto.`ID_PRODU` AS producto_ID_PRODU,
+     producto.`NOM_PRODU` AS producto_NOM_PRODU,
+     producto.`STOCK_PRODU` AS producto_STOCK_PRODU,
+     producto.`PRECIO_PRODU` AS producto_PRECIO_PRODU
+FROM
+     `producto` producto]]>
+	</queryString>
+	<field name="producto_ID_PRODU" class="java.lang.Integer"/>
+	<field name="producto_NOM_PRODU" class="java.lang.String"/>
+	<field name="producto_STOCK_PRODU" class="java.lang.Integer"/>
+	<field name="producto_PRECIO_PRODU" class="java.math.BigDecimal"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement x="151" y="15" width="286" height="44" uuid="21f6f580-7147-4a4d-bb49-503ef7a5bd80"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="20" isBold="true"/>
+				</textElement>
+				<text><![CDATA[LISTA DE PRODUCTOS]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="173" splitType="Stretch">
+			<componentElement>
+				<reportElement key="table" style="table" x="77" y="6" width="360" height="80" uuid="446869c4-1414-42e2-9b78-7d1b68100b80"/>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="producto" uuid="4f437287-d1a9-4945-bf3d-bdb3831900c7">
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="90" uuid="8d723af2-27f6-415c-939d-20b9fa6fd90c">
+						<jr:columnHeader style="table_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="90" height="30" uuid="43140f80-1ce6-47e2-9f98-5c76df9475a0"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="12" isBold="true"/>
+								</textElement>
+								<text><![CDATA[ID PRODUCTO]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="20" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="90" height="20" uuid="6a825149-4787-4dba-a063-2340279836ef"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{producto_ID_PRODU}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="162" uuid="234f0c2e-a5d6-44fb-8434-1f2a756a0a31">
+						<jr:columnHeader style="table_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="162" height="30" uuid="3116f197-f735-4a30-ad38-9996f6b231cb"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="12" isBold="true"/>
+								</textElement>
+								<text><![CDATA[NOMBRE DEL PRODUCTO]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="20" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="162" height="20" uuid="2dd6d4e8-2091-4001-bbe6-0532dafcf8a5"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{producto_NOM_PRODU}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="90" uuid="23e28d2e-44a8-42a1-8c90-9c064ca951f0">
+						<jr:columnHeader style="table_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="90" height="30" uuid="ed227de8-e7f6-416a-ba33-d0cf53a040eb"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="12" isBold="true"/>
+								</textElement>
+								<text><![CDATA[STOCK]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="20" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="90" height="20" uuid="335c0e8c-7c01-425f-96e8-38ecee5265db"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{producto_STOCK_PRODU}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="90" uuid="363d2922-5b31-4f33-aa07-a153fe37fddb">
+						<jr:columnHeader style="table_CH" height="30" rowSpan="1">
+							<staticText>
+								<reportElement x="0" y="0" width="90" height="30" uuid="4fd102c8-5613-49fb-9b33-74cb2bcc065a"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="12" isBold="true"/>
+								</textElement>
+								<text><![CDATA[PRECIO]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="table_TD" height="20" rowSpan="1">
+							<textField>
+								<reportElement x="0" y="0" width="90" height="20" uuid="b4b8cc93-3953-4265-9fb4-16f4084708ea"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{producto_PRECIO_PRODU}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="36" splitType="Stretch"/>
+	</detail>
+</jasperReport>
